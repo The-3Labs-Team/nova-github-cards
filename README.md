@@ -19,11 +19,11 @@ This is the contents of the published config file:
 <?php
 
 return [
-    'vendor' => '',
-    'repository' => '',
-    'branch' => '',
+    'vendor' => '...',
+    'repository' => '...',
+    'branch' => '...',
     'per_page' => 5,
-    'cache' => 3600, //in seconds
+    'cache_ttl' => 0, //in seconds
 
     'icons' => [
         'error' => [
@@ -35,7 +35,16 @@ return [
             'iconClass' => 'text-green-500',
         ],
     ],
+
+    'commits' => [
+        'message' => 'Al momento nessuna Implementazioni presente',
+    ],
+
+    'issues' => [
+        'message' => 'Al momento nessuna Issue presente',
+    ]
 ];
+
 ```
 
 You can publish the GitHub config file with:
@@ -51,14 +60,17 @@ You can choose from several options:
 - Jwt
 - Private
 
-**The configuration file is documented, so choose the option that best suits your needs.**
+**The config file is documented, so choose the option that best suits your needs.**
+
 ## Usage
 
 ```php
 use \The3LabsTeam\NovaGithubCards\LatestCommitsTable;
+use \The3LabsTeam\NovaGithubCards\LatestIssuesTable;
 ...
 
-(new LatestCommitsTable())
+(new LatestCommitsTable(name: 'The name of the card'))
+(new LatestIssuesTable(name: 'The name of the card'))
 ```
 You can also override the config files like this:
 ```php

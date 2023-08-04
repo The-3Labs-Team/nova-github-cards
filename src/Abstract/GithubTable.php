@@ -2,6 +2,7 @@
 
 namespace The3LabsTeam\NovaGithubCards\Abstract;
 
+use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Metrics\MetricTableRow;
 use Laravel\Nova\Metrics\Table;
 
@@ -13,12 +14,13 @@ abstract class GithubTable extends Table
     protected ?string $repository;
     protected ?string $branch;
     protected ?int $per_page;
-    protected ?int $cache;
+    protected ?int $cache_ttl;
 
     /**
      * Createa a new Github table istance
      */
     public function __construct(
+        string $name = null,
         string $vendor = null,
         string $repository = null,
         string $branch = null,
@@ -26,6 +28,7 @@ abstract class GithubTable extends Table
         int $cache_ttl = null)
     {
         parent::__construct();
+        $this->name =  'GitHub™ - ' . $name;
         $this->vendor = $vendor ?? config('nova-github-cards.vendor');
         $this->repository = $repository ?? config('nova-github-cards.repository');
         $this->branch = $branch ?? config('nova-github-cards.branch');
@@ -40,7 +43,7 @@ abstract class GithubTable extends Table
      */
     public function cacheFor()
     {
-//        return now()->addMinutes($this->cache_ttl);
+        return now()->addMinutes($this->cache_ttl);
     }
 
     /**
@@ -72,14 +75,25 @@ abstract class GithubTable extends Table
         string $title,
         string $subtitle,
         ?string $icon = null,
-        ?string $iconClass = null)
+        ?string $iconClass = null,
+        ?string $url = null)
     : MetricTableRow
     {
         return MetricTableRow::make()
             ->icon($icon ?? config('nova-github-cards.icons.success.icon'))
             ->iconClass($iconClass ?? config('nova-github-cards.icons.success.iconClass'))
             ->title($title)
-            ->subtitle($subtitle);
+            ->subtitle($subtitle)
+            ->actions(function () use ($url)
+            {
+                if ($url) {
+                    return [
+                        MenuItem::externalLink('Vedi', $url)->openInNewTab(),
+                    ];
+                }
+
+                return [];
+            });
     }
 
 }

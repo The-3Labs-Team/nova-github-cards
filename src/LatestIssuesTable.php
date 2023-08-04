@@ -12,7 +12,7 @@ use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 final class LatestIssuesTable extends GithubTable
 {
 
-    public $name = 'Github Issues';
+    public $name;
     public array $issues = [];
 
     /**
@@ -39,13 +39,21 @@ final class LatestIssuesTable extends GithubTable
     {
         $table = [];
 
-        // if empty issues
+        if(empty($this->issues)) {
+            $table[] = $this->renderRow(config('nova-github-cards.issues.message'), '');
+            return $table;
+        }
 
         foreach ($this->issues as $issue) {
-            $title = $issue['title'];
-            $subtitle = Carbon::parse($issue['created_at'])->diffForHumans();
 
-            $table[] = $this->renderRow($title, $subtitle);
+            $title = $issue['title'];
+            $assigneeName = $issue['assignee'] != null ? 'Assegnato a ' . $issue['assignee']['login'] : 'Da assegnare';
+            $subtitle = Carbon::parse($issue['created_at'])->diffForHumans() . ' - ' . $assigneeName;
+            $icon = $issue['assignee'] != null ? 'tag' : 'plus-circle';
+            $color = $issue['assignee'] != null ? 'text-green-500' : 'text-gray-500';
+            $url = $issue['html_url'];
+
+            $table[] = $this->renderRow(title: $title, subtitle: $subtitle, url: $url, icon: $icon, iconClass: $color);
         }
 
         return $table;
@@ -58,6 +66,12 @@ final class LatestIssuesTable extends GithubTable
      */
     public function getIssues(): mixed
     {
+//        dd(
+//            Github::issues()->all(
+//                $this->vendor,
+//                $this->repository,
+//                ['sha' => $this->branch, 'per_page' => $this->per_page])
+//        );
         try {
             // @phpstan-ignore-next-line
             return Github::issues()->all(

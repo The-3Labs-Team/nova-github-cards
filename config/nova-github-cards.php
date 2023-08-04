@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'name' => 'GitHub™ - Ultimi sviluppi',
     'vendor' => 'The-3Labs-Team',
     'repository' => 'nospoiler',
     'branch' => 'master',
@@ -18,4 +17,12 @@ return [
             'iconClass' => 'text-green-500',
         ],
     ],
+
+    'commits' => [
+        'message' => 'Al momento nessuna Implementazioni presente',
+    ],
+
+    'issues' => [
+        'message' => 'Al momento nessuna Issue presente',
+    ]
 ];
