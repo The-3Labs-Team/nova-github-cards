@@ -11,14 +11,14 @@ use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 
 final class LatestIssuesTable extends GithubTable
 {
-
     public $title = 'novaGithubCard.issuesTitle';
+
     public array $issues = [];
 
     /**
      * Calculate the value of the metric.
      */
-    public function calculate(NovaRequest $request) : mixed
+    public function calculate(NovaRequest $request): mixed
     {
         $this->issues = $this->getIssues();
 
@@ -39,16 +39,17 @@ final class LatestIssuesTable extends GithubTable
     {
         $table = [];
 
-        if(empty($this->issues)) {
+        if (empty($this->issues)) {
             $table[] = $this->renderRow((__('novaGithubCard.noIssuesFound')), '');
+
             return $table;
         }
 
         foreach ($this->issues as $issue) {
 
             $title = $issue['title'];
-            $assigneeName = $issue['assignee'] != null ? (__('novaGithubCard.assigned')) . $issue['assignee']['login'] : (__('novaGithubCard.assign'));
-            $subtitle = Carbon::parse($issue['created_at'])->diffForHumans() . ' - ' . $assigneeName;
+            $assigneeName = $issue['assignee'] != null ? (__('novaGithubCard.assigned')).$issue['assignee']['login'] : (__('novaGithubCard.assign'));
+            $subtitle = Carbon::parse($issue['created_at'])->diffForHumans().' - '.$assigneeName;
             $icon = $issue['assignee'] != null ? 'tag' : 'plus-circle';
             $url = $issue['html_url'];
 
@@ -60,17 +61,15 @@ final class LatestIssuesTable extends GithubTable
 
     /**
      * Get issues from Github
-     *
-     * @return mixed
      */
     public function getIssues(): mixed
     {
-//        dd(
-//            Github::issues()->all(
-//                $this->vendor,
-//                $this->repository,
-//                ['sha' => $this->branch, 'per_page' => $this->per_page])
-//        );
+        //        dd(
+        //            Github::issues()->all(
+        //                $this->vendor,
+        //                $this->repository,
+        //                ['sha' => $this->branch, 'per_page' => $this->per_page])
+        //        );
         try {
             // @phpstan-ignore-next-line
             return Github::issues()->all(

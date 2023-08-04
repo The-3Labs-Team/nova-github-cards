@@ -6,14 +6,18 @@ use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Metrics\MetricTableRow;
 use Laravel\Nova\Metrics\Table;
 
-
 abstract class GithubTable extends Table
 {
     public $title = 'GitHub™';
+
     protected ?string $vendor;
+
     protected ?string $repository;
+
     protected ?string $branch;
+
     protected ?int $per_page;
+
     protected ?int $cache_ttl;
 
     /**
@@ -48,8 +52,6 @@ abstract class GithubTable extends Table
 
     /**
      * Return an error message in Nova Table Row
-     *
-     * @return array
      */
     public function returnErrorMessage(): array
     {
@@ -63,37 +65,27 @@ abstract class GithubTable extends Table
 
     /**
      * Render a row in Nova table
-     *
-     * @param string $title
-     * @param string $subtitle
-     * @param string|null $icon
-     * @param string|null $iconClass
-     *
-     * @return MetricTableRow
      */
     public function renderRow(
         string $title,
         string $subtitle,
-        ?string $icon = null,
-        ?string $iconClass = null,
-        ?string $url = null)
-    : MetricTableRow
+        string $icon = null,
+        string $iconClass = null,
+        string $url = null): MetricTableRow
     {
         return MetricTableRow::make()
             ->icon($icon ?? config('nova-github-cards.icons.success.icon'))
             ->iconClass($iconClass ?? config('nova-github-cards.icons.success.iconClass'))
             ->title($title)
             ->subtitle($subtitle)
-            ->actions(function () use ($url)
-            {
+            ->actions(function () use ($url) {
                 if ($url) {
                     return [
-                        MenuItem::externalLink( (__('novaGithubCard.show')), $url)->openInNewTab(),
+                        MenuItem::externalLink((__('novaGithubCard.show')), $url)->openInNewTab(),
                     ];
                 }
 
                 return [];
             });
     }
-
 }
