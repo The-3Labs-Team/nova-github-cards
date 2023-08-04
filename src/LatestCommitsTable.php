@@ -11,7 +11,8 @@ use Laravel\Nova\Metrics\Table;
 
 class LatestCommitsTable extends Table
 {
-    public $name = 'GitHub™ - Ultimi sviluppi';
+
+    public $name = 'Github Commits';
     public array $commits = [];
 
     /**
@@ -21,24 +22,13 @@ class LatestCommitsTable extends Table
      */
     public function calculate(NovaRequest $request)
     {
-
-        $this->commits = $this->getGithubCommits();
+        $this->commits = $this->getCommits();
 
         if (empty($this->commits)) {
             return $this->returnErrorMessage();
         } else {
             return $this->generateLatestCommitFields();
         }
-    }
-
-    /**
-     * Determine the amount of time the results of the metric should be cached.
-     *
-     * @return \DateTimeInterface|\DateInterval|float|int|null
-     */
-    public function cacheFor()
-    {
-         return now()->addMinutes(5);
     }
 
     /**
@@ -51,13 +41,10 @@ class LatestCommitsTable extends Table
         $data = [];
 
         foreach ($this->commits as $commit) {
-            $data[] = MetricTableRow::make()
-                ->icon(config('nova-github-cards.icons.success.icon'))
-                ->iconClass(config('nova-github-cards.icons.success.iconClass'))
-                ->title($commit['commit']['message'])
-                ->subtitle(
-                    $commit['commit']['author']['name'].' - '.Carbon::parse($commit['commit']['author']['date'])->format('d/m/Y H:i:s')
-                );
+            $title = $commit['commit']['message'];
+            $subtitle = Carbon::parse($commit['commit']['author']['date'])->diffForHumans();
+
+            $table[] = $this->renderRow($title, $subtitle);
         }
 
         return $data;
@@ -75,19 +62,22 @@ class LatestCommitsTable extends Table
     }
 
     /**
-     * @param $githubCommits
+     * Get commits from Github
+     *
      * @return mixed
      */
-    public function getGithubCommits(): mixed
+    public function getCommits(): mixed
     {
         try {
+            // @phpstan-ignore-next-line
             return GitHub::repo()->commits()->all(
-                config('nova-github-cards.organizations'),
-                config('nova-github-cards.repository'),
-                ['sha' => config('nova-github-cards.branch'), 'per_page' => config('nova-github-cards.per_page')]);
-        } catch (\Exception $e) {
+                $this->vendor,
+                $this->repository,
+                ['sha' => $this->branch, 'per_page' => $this->per_page]);
+        } catch (Exception $e) {
             Log::error($e);
         }
+
         return [];
     }
 }

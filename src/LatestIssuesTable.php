@@ -1,0 +1,73 @@
+<?php
+
+namespace The3LabsTeam\NovaGithubCards;
+
+use Carbon\Carbon;
+use Exception;
+use GrahamCampbell\GitHub\Facades\GitHub;
+use Illuminate\Support\Facades\Log;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
+
+final class LatestIssuesTable extends GithubTable
+{
+
+    public $name = 'Github Issues';
+    public array $issues = [];
+
+    /**
+     * Calculate the value of the metric.
+     */
+    public function calculate(NovaRequest $request) : mixed
+    {
+        $this->issues = $this->getIssues();
+
+        if (empty($this->issues)) {
+            return $this->returnErrorMessage();
+        }
+
+        return $this->renderIssuesTable();
+
+    }
+
+    /**
+     * Generate the fields for the latest issues0
+     *
+     * @return array
+     */
+    public function renderIssuesTable()
+    {
+        $table = [];
+
+        // if empty issues
+
+        foreach ($this->issues as $issue) {
+            $title = $issue['title'];
+            $subtitle = Carbon::parse($issue['created_at'])->diffForHumans();
+
+            $table[] = $this->renderRow($title, $subtitle);
+        }
+
+        return $table;
+    }
+
+    /**
+     * Get issues from Github
+     *
+     * @return mixed
+     */
+    public function getIssues(): mixed
+    {
+        try {
+            // @phpstan-ignore-next-line
+            return Github::issues()->all(
+                $this->vendor,
+                $this->repository,
+                ['sha' => $this->branch, 'per_page' => $this->per_page]);
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+
+        return [];
+    }
+}

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'GitHub™ - Ultimi sviluppi',
     'vendor' => 'The-3Labs-Team',
     'repository' => 'nospoiler',
     'branch' => 'master',
