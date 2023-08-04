@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://github.com/the-3labs-team/nova-ai-assistant/raw/HEAD/art/banner.png" width="100%" 
+alt="Logo Nova Github Cards by The3LabsTeam"></p>
+
 # nova-github-cards
 
 ## Installation
