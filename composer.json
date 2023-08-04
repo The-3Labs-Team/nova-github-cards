@@ -36,6 +36,7 @@
     "require-dev": {
         "laravel/nova": "^4.0",
         "laravel/pint": "^1.10",
+        "nunomaduro/larastan": "2.0",
         "orchestra/testbench": "^7.0",
         "phpunit/phpunit": "^9.5"
     },
@@ -68,6 +69,9 @@
         ],
         "lint": [
             "./vendor/bin/pint"
+        ],
+        "analyse": [
+            "./vendor/bin/phpstan analyse --memory-limit=2G"
         ]
     },
     "minimum-stability": "dev",
