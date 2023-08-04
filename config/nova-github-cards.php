@@ -6,7 +6,7 @@ return [
     'repository' => 'nospoiler',
     'branch' => 'master',
     'per_page' => 5,
-    'cache' => 3600, //in seconds
+    'cache_ttl' => 0, //in seconds
 
     'icons' => [
         'error' => [

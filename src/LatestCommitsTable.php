@@ -3,13 +3,13 @@
 namespace The3LabsTeam\NovaGithubCards;
 
 use Carbon\Carbon;
+use Exception;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Log;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Metrics\MetricTableRow;
-use Laravel\Nova\Metrics\Table;
+use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 
-class LatestCommitsTable extends Table
+final class LatestCommitsTable extends GithubTable
 {
 
     public $name = 'Github Commits';
@@ -17,18 +17,17 @@ class LatestCommitsTable extends Table
 
     /**
      * Calculate the value of the metric.
-     *
-     * @return mixed
      */
-    public function calculate(NovaRequest $request)
+    public function calculate(NovaRequest $request) : mixed
     {
         $this->commits = $this->getCommits();
 
         if (empty($this->commits)) {
             return $this->returnErrorMessage();
-        } else {
-            return $this->generateLatestCommitFields();
         }
+
+        return $this->renderCommitsTable();
+
     }
 
     /**
@@ -36,9 +35,9 @@ class LatestCommitsTable extends Table
      *
      * @return array
      */
-    public function generateLatestCommitFields()
+    public function renderCommitsTable()
     {
-        $data = [];
+        $table = [];
 
         foreach ($this->commits as $commit) {
             $title = $commit['commit']['message'];
@@ -47,18 +46,7 @@ class LatestCommitsTable extends Table
             $table[] = $this->renderRow($title, $subtitle);
         }
 
-        return $data;
-    }
-
-    public function returnErrorMessage(): array
-    {
-        return [
-            MetricTableRow::make()
-                ->icon(config('nova-github-cards.icons.error.icon'))
-                ->iconClass(config('nova-github-cards.icons.error.iconClass'))
-                ->title('No response from the API')
-                ->subtitle('Verify the configuration files or check that the GitHub access token is correctly'),
-        ];
+        return $table;
     }
 
     /**
