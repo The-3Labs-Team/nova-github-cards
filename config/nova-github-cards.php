@@ -17,12 +17,4 @@ return [
             'iconClass' => 'text-green-500',
         ],
     ],
-
-    'commits' => [
-        'message' => 'Al momento nessuna Commits presente',
-    ],
-
-    'issues' => [
-        'message' => 'Al momento nessuna Issues presente',
-    ]
 ];

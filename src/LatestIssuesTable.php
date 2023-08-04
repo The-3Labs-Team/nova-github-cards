@@ -12,7 +12,7 @@ use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 final class LatestIssuesTable extends GithubTable
 {
 
-    public $name;
+    public $title = 'novaGithubCard.issuesTitle';
     public array $issues = [];
 
     /**
@@ -40,14 +40,14 @@ final class LatestIssuesTable extends GithubTable
         $table = [];
 
         if(empty($this->issues)) {
-            $table[] = $this->renderRow(config('nova-github-cards.issues.message'), '');
+            $table[] = $this->renderRow((__('novaGithubCard.noIssuesFound')), '');
             return $table;
         }
 
         foreach ($this->issues as $issue) {
 
             $title = $issue['title'];
-            $assigneeName = $issue['assignee'] != null ? 'Assegnato a ' . $issue['assignee']['login'] : 'Da assegnare';
+            $assigneeName = $issue['assignee'] != null ? (__('novaGithubCard.assigned')) . $issue['assignee']['login'] : (__('novaGithubCard.assign'));
             $subtitle = Carbon::parse($issue['created_at'])->diffForHumans() . ' - ' . $assigneeName;
             $icon = $issue['assignee'] != null ? 'tag' : 'plus-circle';
             $url = $issue['html_url'];

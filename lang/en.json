@@ -1,0 +1,10 @@
+{
+    "novaGithubCard.show": "Show",
+    "novaGithubCard.assigned": "Assigned to ",
+    "novaGithubCard.assign": "To assign",
+    "novaGithubCard.commitBy": "By ",
+    "novaGithubCard.noCommitsFound": "Currently, there are no Commits present",
+    "novaGithubCard.noIssuesFound": "Currently, there are no Issues present",
+    "novaGithubCard.commitsTitle": "GitHub™ - Latest Commits",
+    "novaGithubCard.issuesTitle": "GitHub™ - Latest Issues"
+}

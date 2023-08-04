@@ -12,7 +12,7 @@ use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 final class LatestCommitsTable extends GithubTable
 {
 
-    public $name;
+    public $title = 'novaGithubCard.commitsTitle';
     public array $commits = [];
 
     /**
@@ -40,13 +40,13 @@ final class LatestCommitsTable extends GithubTable
         $table = [];
 
         if(empty($this->commits)) {
-            $table[] = $this->renderRow(title: config('nova-github-cards.commits.message'), subtitle: '', icon: 'information-circle', iconClass: 'text-gray-500');
+            $table[] = $this->renderRow(title: (__('novaGithubCard.noCommitsFound')), subtitle: '', icon: 'information-circle', iconClass: 'text-gray-500');
             return $table;
         }
 
         foreach ($this->commits as $commit) {
             $title = $commit['commit']['message'];
-            $subtitle = Carbon::parse($commit['commit']['author']['date'])->diffForHumans() . ' - Da ' . $commit['commit']['author']['name'];
+            $subtitle = Carbon::parse($commit['commit']['author']['date'])->diffForHumans() . ' - ' . (__('novaGithubCard.commitBy')) . $commit['commit']['author']['name'];
             $url = $commit['html_url'];
 
             $table[] = $this->renderRow(title: $title, subtitle: $subtitle, url: $url);

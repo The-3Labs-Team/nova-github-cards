@@ -9,7 +9,7 @@ use Laravel\Nova\Metrics\Table;
 
 abstract class GithubTable extends Table
 {
-
+    public $title = 'GitHub™';
     protected ?string $vendor;
     protected ?string $repository;
     protected ?string $branch;
@@ -28,7 +28,7 @@ abstract class GithubTable extends Table
         int $cache_ttl = null)
     {
         parent::__construct();
-        $this->name =  'GitHub™ - ' . $name;
+        $this->name = $name ?? __($this->title);
         $this->vendor = $vendor ?? config('nova-github-cards.vendor');
         $this->repository = $repository ?? config('nova-github-cards.repository');
         $this->branch = $branch ?? config('nova-github-cards.branch');
@@ -88,7 +88,7 @@ abstract class GithubTable extends Table
             {
                 if ($url) {
                     return [
-                        MenuItem::externalLink('Vedi', $url)->openInNewTab(),
+                        MenuItem::externalLink( (__('novaGithubCard.show')), $url)->openInNewTab(),
                     ];
                 }
 

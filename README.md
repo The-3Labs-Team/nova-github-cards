@@ -8,7 +8,7 @@ alt="Logo Nova Github Cards by The3LabsTeam"></p>
 
 You can install the package via composer:
 ```bash
-composer ...
+composer required the-3labs-team/nova-github-cards
 ```
 
 You can publish the config file with:
@@ -23,9 +23,9 @@ This is the contents of the published config file:
 <?php
 
 return [
-    'vendor' => '...',
-    'repository' => '...',
-    'branch' => '...',
+    'vendor' => 'The-3Labs-Team',
+    'repository' => 'nospoiler',
+    'branch' => 'master',
     'per_page' => 5,
     'cache_ttl' => 0, //in seconds
 
@@ -39,16 +39,7 @@ return [
             'iconClass' => 'text-green-500',
         ],
     ],
-
-    'commits' => [
-        'message' => 'Al momento nessuna Implementazioni presente',
-    ],
-
-    'issues' => [
-        'message' => 'Al momento nessuna Issue presente',
-    ]
 ];
-
 ```
 
 You can publish the GitHub config file with:
