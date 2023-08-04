@@ -1,0 +1,75 @@
+{
+    "name": "the-3labs-team/nova-github-cards",
+    "description": "GitHub Commits integration with Nova Metrics",
+    "keywords": [
+        "laravel",
+        "nova",
+        "github",
+        "github-commits",
+        "nova-metrics",
+        "php"
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+    "homepage": "https://github.com/The-3Labs-Team/nova-github-cards",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stefano Novelli",
+            "email": "murdercode@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Claudio Emmolo",
+            "email": "claudioemmolo90@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1|^8.2",
+        "graham-campbell/github": "^12.2"
+    },
+    "require-dev": {
+        "laravel/nova": "^4.0",
+        "laravel/pint": "^1.10",
+        "orchestra/testbench": "^7.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "The3LabsTeam\\NovaGithubCards\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "The3LabsTeam\\NovaGithubCards\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "The3LabsTeam\\NovaGithubCards\\NovaGithubCardsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ],
+        "lint": [
+            "./vendor/bin/pint"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
