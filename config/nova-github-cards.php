@@ -19,10 +19,10 @@ return [
     ],
 
     'commits' => [
-        'message' => 'Al momento nessuna Implementazioni presente',
+        'message' => 'Al momento nessuna Commits presente',
     ],
 
     'issues' => [
-        'message' => 'Al momento nessuna Issue presente',
+        'message' => 'Al momento nessuna Issues presente',
     ]
 ];

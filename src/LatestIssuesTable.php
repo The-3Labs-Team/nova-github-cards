@@ -50,10 +50,9 @@ final class LatestIssuesTable extends GithubTable
             $assigneeName = $issue['assignee'] != null ? 'Assegnato a ' . $issue['assignee']['login'] : 'Da assegnare';
             $subtitle = Carbon::parse($issue['created_at'])->diffForHumans() . ' - ' . $assigneeName;
             $icon = $issue['assignee'] != null ? 'tag' : 'plus-circle';
-            $color = $issue['assignee'] != null ? 'text-green-500' : 'text-gray-500';
             $url = $issue['html_url'];
 
-            $table[] = $this->renderRow(title: $title, subtitle: $subtitle, url: $url, icon: $icon, iconClass: $color);
+            $table[] = $this->renderRow(title: $title, subtitle: $subtitle, url: $url, icon: $icon, iconClass: 'text-gray-500');
         }
 
         return $table;
