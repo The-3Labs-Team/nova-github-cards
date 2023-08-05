@@ -6,22 +6,23 @@ use Carbon\Carbon;
 use Exception;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Log;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 
 final class LatestCommitsTable extends GithubTable
 {
     public $title = 'novaGithubCard.commitsTitle';
 
-    public ?GitHub $commits = null;
+    public array $commits = [];
 
     /**
      * Calculate the value of the metric.
      */
-    public function calculate(): array
+    public function calculate(NovaRequest $request): mixed
     {
         $this->commits = $this->getCommits();
 
-        if (!$this->commits) {
+        if (empty($this->commits)) {
             return $this->returnErrorMessage();
         }
 
@@ -58,7 +59,7 @@ final class LatestCommitsTable extends GithubTable
     /**
      * Get commits from Github
      */
-    public function getCommits(): ?GitHub
+    public function getCommits(): mixed
     {
         try {
             // @phpstan-ignore-next-line
@@ -70,6 +71,6 @@ final class LatestCommitsTable extends GithubTable
             Log::error($e);
         }
 
-        return null;
+        return [];
     }
 }
