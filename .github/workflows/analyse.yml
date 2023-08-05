@@ -19,6 +19,9 @@ jobs:
           php-version: '8.1'
           coverage: none
 
+      - name: Add Nova configuration
+        run: composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_LICENSE_KEY}
+
       - name: Install composer dependencies
         uses: ramsey/composer-install@v2
 
