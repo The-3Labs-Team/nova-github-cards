@@ -13,7 +13,7 @@ final class LatestCommitsTable extends GithubTable
 {
     public $title = 'novaGithubCard.commitsTitle';
 
-    public ?array $commits = [];
+    public ?GitHub $commits = null;
 
     /**
      * Calculate the value of the metric.
@@ -22,7 +22,7 @@ final class LatestCommitsTable extends GithubTable
     {
         $this->commits = $this->getCommits();
 
-        if (empty($this->commits)) {
+        if (!$this->commits) {
             return $this->returnErrorMessage();
         }
 
