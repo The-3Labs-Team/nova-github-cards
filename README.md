@@ -4,10 +4,11 @@ alt="Logo Nova Github Cards by The3LabsTeam"></p>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/the-3labs-team/nova-github-cards.svg?style=flat-square)](https://packagist.org/packages/the-3labs-team/nova-github-cards)
 [![Fix PHP code style issues](https://github.com/The-3Labs-Team/nova-github-cards/actions/workflows/lint.yml/badge.svg)](https://github.com/The-3Labs-Team/nova-github-cards/actions/workflows/lint.yml)
-[![PHPStan](https://github.com/The-3Labs-Team/nova-github-cards/actions/workflows/analyse.yml/badge.svg)](https://github.com/The-3Labs-Team/nova-github-cards/actions/workflows/analyse.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d06434af7ba21185c9b0/maintainability)](https://codeclimate.com/github/The-3Labs-Team/nova-github-cards/maintainability)
 ![License Mit](https://img.shields.io/github/license/murdercode/laravel-shortcode-plus)
 [![Total Downloads](https://img.shields.io/packagist/dt/the-3labs-team/nova-github-cards.svg?style=flat-square)](https://packagist.org/packages/the-3labs-team/nova-github-cards)
+
+[//]: # ([![PHPStan]&#40;https://github.com/The-3Labs-Team/nova-github-cards/actions/workflows/analyse.yml/badge.svg&#41;]&#40;https://github.com/The-3Labs-Team/nova-github-cards/actions/workflows/analyse.yml&#41;)
 
 # Nova Github Cards
 
