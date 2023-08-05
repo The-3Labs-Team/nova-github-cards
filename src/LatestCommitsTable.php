@@ -18,11 +18,11 @@ final class LatestCommitsTable extends GithubTable
     /**
      * Calculate the value of the metric.
      */
-    public function calculate(NovaRequest $request): mixed
+    public function calculate(): array
     {
         $this->commits = $this->getCommits();
 
-        if (!$this->commits) {
+        if (empty($this->commits)) {
             return $this->returnErrorMessage();
         }
 
