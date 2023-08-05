@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Exception;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Log;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 
 final class LatestCommitsTable extends GithubTable
