@@ -21,7 +21,7 @@ final class LatestCommitsTable extends GithubTable
     {
         $this->commits = $this->getCommits();
 
-        if (!$this->commits) {
+        if (! $this->commits) {
             return $this->returnErrorMessage();
         }
 
