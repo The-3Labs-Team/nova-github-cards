@@ -64,12 +64,6 @@ final class LatestIssuesTable extends GithubTable
      */
     public function getIssues(): mixed
     {
-        //        dd(
-        //            Github::issues()->all(
-        //                $this->vendor,
-        //                $this->repository,
-        //                ['sha' => $this->branch, 'per_page' => $this->per_page])
-        //        );
         try {
             // @phpstan-ignore-next-line
             return Github::issues()->all(
