@@ -24,5 +24,5 @@ return [
 
     'issues' => [
         'message' => 'Al momento nessuna Issues presente',
-    ]
+    ],
 ];

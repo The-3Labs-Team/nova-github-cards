@@ -11,14 +11,14 @@ use The3LabsTeam\NovaGithubCards\Abstract\GithubTable;
 
 final class LatestCommitsTable extends GithubTable
 {
-
     public $name;
+
     public array $commits = [];
 
     /**
      * Calculate the value of the metric.
      */
-    public function calculate(NovaRequest $request) : mixed
+    public function calculate(NovaRequest $request): mixed
     {
         $this->commits = $this->getCommits();
 
@@ -39,14 +39,15 @@ final class LatestCommitsTable extends GithubTable
     {
         $table = [];
 
-        if(empty($this->commits)) {
+        if (empty($this->commits)) {
             $table[] = $this->renderRow(title: config('nova-github-cards.commits.message'), subtitle: '', icon: 'information-circle', iconClass: 'text-gray-500');
+
             return $table;
         }
 
         foreach ($this->commits as $commit) {
             $title = $commit['commit']['message'];
-            $subtitle = Carbon::parse($commit['commit']['author']['date'])->diffForHumans() . ' - Da ' . $commit['commit']['author']['name'];
+            $subtitle = Carbon::parse($commit['commit']['author']['date'])->diffForHumans().' - Da '.$commit['commit']['author']['name'];
             $url = $commit['html_url'];
 
             $table[] = $this->renderRow(title: $title, subtitle: $subtitle, url: $url);
@@ -57,8 +58,6 @@ final class LatestCommitsTable extends GithubTable
 
     /**
      * Get commits from Github
-     *
-     * @return mixed
      */
     public function getCommits(): mixed
     {

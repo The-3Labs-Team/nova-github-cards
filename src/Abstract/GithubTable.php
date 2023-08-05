@@ -6,14 +6,16 @@ use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Metrics\MetricTableRow;
 use Laravel\Nova\Metrics\Table;
 
-
 abstract class GithubTable extends Table
 {
-
     protected ?string $vendor;
+
     protected ?string $repository;
+
     protected ?string $branch;
+
     protected ?int $per_page;
+
     protected ?int $cache_ttl;
 
     /**
@@ -28,7 +30,7 @@ abstract class GithubTable extends Table
         int $cache_ttl = null)
     {
         parent::__construct();
-        $this->name =  'GitHub™ - ' . $name;
+        $this->name = 'GitHub™ - '.$name;
         $this->vendor = $vendor ?? config('nova-github-cards.vendor');
         $this->repository = $repository ?? config('nova-github-cards.repository');
         $this->branch = $branch ?? config('nova-github-cards.branch');
@@ -48,8 +50,6 @@ abstract class GithubTable extends Table
 
     /**
      * Return an error message in Nova Table Row
-     *
-     * @return array
      */
     public function returnErrorMessage(): array
     {
@@ -63,29 +63,20 @@ abstract class GithubTable extends Table
 
     /**
      * Render a row in Nova table
-     *
-     * @param string $title
-     * @param string $subtitle
-     * @param string|null $icon
-     * @param string|null $iconClass
-     *
-     * @return MetricTableRow
      */
     public function renderRow(
         string $title,
         string $subtitle,
-        ?string $icon = null,
-        ?string $iconClass = null,
-        ?string $url = null)
-    : MetricTableRow
+        string $icon = null,
+        string $iconClass = null,
+        string $url = null): MetricTableRow
     {
         return MetricTableRow::make()
             ->icon($icon ?? config('nova-github-cards.icons.success.icon'))
             ->iconClass($iconClass ?? config('nova-github-cards.icons.success.iconClass'))
             ->title($title)
             ->subtitle($subtitle)
-            ->actions(function () use ($url)
-            {
+            ->actions(function () use ($url) {
                 if ($url) {
                     return [
                         MenuItem::externalLink('Vedi', $url)->openInNewTab(),
@@ -95,5 +86,4 @@ abstract class GithubTable extends Table
                 return [];
             });
     }
-
 }
