@@ -15,6 +15,12 @@ Enhance your Laravel Nova experience by seamlessly integrating GitHub project ca
 package allows you to effortlessly display essential GitHub statistics, issues, commits, and other project information
 directly within your Nova dashboard.
 
+## Demo
+<p align="center">
+<img src="https://github.com/the-3labs-team/nova-github-cards/raw/HEAD/art/demo.png" width="100%" 
+alt="Demo Nova Github Cards by The3LabsTeam"></p>
+
+
 ## Installation
 
 You can install the package via composer:
