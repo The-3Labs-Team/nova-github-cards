@@ -37,9 +37,9 @@ This is the contents of the published config file:
 <?php
 
 return [
-    'vendor' => 'The-3Labs-Team',
-    'repository' => 'nospoiler',
-    'branch' => 'master',
+    'vendor' => 'YOUR-VENDOR',
+    'repository' => 'YOUR-REPO-NAME',
+    'branch' => 'main',
     'per_page' => 5,
     'cache_ttl' => 0, //in seconds
 
@@ -54,6 +54,7 @@ return [
         ],
     ],
 ];
+
 ```
 
 **Note:** this package uses [Laravel GitHub](GrahamCampbell\GitHub\GitHubServiceProvider), so you need to configure it

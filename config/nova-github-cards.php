@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'vendor' => 'The-3Labs-Team',
-    'repository' => 'nospoiler',
-    'branch' => 'master',
+    'vendor' => 'YOUR-VENDOR',
+    'repository' => 'YOUR-REPO-NAME',
+    'branch' => 'main',
     'per_page' => 5,
     'cache_ttl' => 0, //in seconds
 
