@@ -26,7 +26,7 @@ alt="Demo Nova Github Cards by The3LabsTeam"></p>
 You can install the package via composer:
 
 ```bash
-composer required the-3labs-team/nova-github-cards
+composer require the-3labs-team/nova-github-cards
 ```
 
 You can publish the config file with:
